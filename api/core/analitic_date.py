@@ -1,4 +1,4 @@
-from app.core.scraping import Scraping
+from api.core.scraping import Scraping
 from datetime import datetime
 from collections import defaultdict
 from collections import Counter

@@ -1,7 +1,7 @@
 #from app.core.analitic_date import Analitic
-from app.models.dados import res as result
+from api.models.dados import res as result
 from flask import render_template
-from app import app
+from api import app
 import json
 
 @app.route("/")
