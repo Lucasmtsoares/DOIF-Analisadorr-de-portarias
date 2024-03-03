@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename="basic-style.css")}}">
+    <title>Doif</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">DOIF - <span>Analisador de portarias das IFs</span></h1>
+        <div class="content">
+            <form action="{{url_for('analisar_portarias')}}" method="post">
+                <input type="text" id="date" placeholder="Digite algo..." >
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+        <div class="res"></div>
+    </div>
+    
+</body>
+</html>
