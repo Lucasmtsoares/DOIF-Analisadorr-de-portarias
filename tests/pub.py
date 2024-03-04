@@ -6,9 +6,9 @@ res = {
         'Outros': 19
     },
     'Fevereiro': {
-        'Nomeacoes': ,
-        'Exoneracoes': ,
-        'Outros': 
+        'Nomeacoes': 9,
+        'Exoneracoes': 7,
+        'Outros': 6
     },
     'Marco': {
         'Nomeacoes': 12,

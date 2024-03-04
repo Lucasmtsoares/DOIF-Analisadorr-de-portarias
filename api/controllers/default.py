@@ -1,7 +1,7 @@
 #from app.core.analitic_date import Analitic
-from api.models.dados import res as result
+from models.dados import res as result
 from flask import render_template
-from api import app
+from __init__ import app
 import json
 
 @app.route("/")
@@ -12,7 +12,7 @@ def index():
 def analisar_portarias():
     datas = result
         
-    return render_template("analitic.html")
+    return render_template("analitic.html", result)
 
 """x = Analitic()
     b = x.analitic()
