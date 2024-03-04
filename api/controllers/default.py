@@ -16,4 +16,4 @@ def analisar_portarias():
 
 """x = Analitic()
     b = x.analitic()
-    print(b)"""
+    print(b) /api/run"""

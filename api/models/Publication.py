@@ -9,6 +9,4 @@ class Publication():
 
     
         
-        
-ob = Publication("Nomeacao", "IFAL", "Lorem ipsum at act grouy date in filter by id vida", 4.662, "01/06/2023", "Elon Musk Pereira")
-
+ 
