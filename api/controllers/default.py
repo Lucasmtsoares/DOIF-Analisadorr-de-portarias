@@ -12,7 +12,7 @@ def index():
 def analisar_portarias():
     datas = result
         
-    return render_template("analitic.html", result)
+    return render_template("analitic.html", result=result)
 
 """x = Analitic()
     b = x.analitic()
