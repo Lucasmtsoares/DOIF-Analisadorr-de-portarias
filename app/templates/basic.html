@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename="css/basic-style.css")}}">
+    <title>Doif</title>
+</head>
+<body>
+    
+    <div class="container">
+        
+        <h1 class="title">DOIFs - <span>Analisador de portarias das IFs</span></h1>
+        <div class="box-button">
+            <a class="button" href="{{url_for('analisar_portarias')}}">Experimente</a>
+        </div>
+        <div class="res"></div>
+    </div>
+    <section class="box-group">
+        <div class="box"><span class="box-title">Sobre</span> </br></br>é uma plataforma de recuparação de informações das portarias das IFs (Instituições Federais de ensino).</div>
+        <div class="box"><span class="box-title">Extração</span> </br></br>A fim de análisar o comportamento de atos de pessoal publicados no DOU referentes as IFs o sistema extrair os dados através de Web scraping/Web crawler, sem uso de API</div>
+        <div class="box"><span class="box-title">Filtros</span> </br></br>O sistema realiza filtragem nos dados obtidos para posterior análise.  Inicialmente, os atos recuperados sã de NOMEAÇÔES e EXONERAÇÔES.</div>
+        <div class="box"><span class="box-title">Limitações</span> </br></br>A recuperação de dados por meio de Web scraping/Web crawler ocasiona algumas limitações como um tempo de processamento demorado. </div>
+    </section>
+</body>
+</html>
