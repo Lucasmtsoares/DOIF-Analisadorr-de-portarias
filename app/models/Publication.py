@@ -1,12 +1,8 @@
-class Publication():
-    def __init__(self, type, if_,  content, concierge, date, responsible):
-        self.type = type
-        self.if_ = if_
-        self.content = content
-        self.concierge = concierge
-        self.date = date
-        self.responsible = responsible
-
-    
+class Publication:
+    def __init__(self, collecion, year, months, urls ):
+        self.collecion = collecion
+        self.year = year
+        self.months = months
+        self.urls = urls
         
- 
+        

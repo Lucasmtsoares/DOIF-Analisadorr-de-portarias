@@ -1,5 +1,5 @@
-from app.core.crawler import Crawler
-from app.models.Publication import Publication
+from app.service.update.crawler import Crawler
+from app.models.Portaria import Portaria
 from bs4 import BeautifulSoup as Be
 import requests
 import re
