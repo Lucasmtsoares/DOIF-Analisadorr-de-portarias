@@ -1,4 +1,14 @@
-v = ['https://www.in.gov.br/web/dou/-/portaria-n-1-de-3-de-janeiro-de-2018-1701728', 'https://www.in.gov.br/web/dou/-/portaria-n-838-de-21-de-dezembro-de-2017-1701845', 'https://www.in.gov.br/web/dou/-/portaria-n-839-de-21-de-dezembro-de-2017-1701872', ]
+TEM = "https://www.in.gov.br/web/dou/-/portaria-n-2-504-de-9-de-outubro-de-2018-45175799"
+NTEM = "https://www.in.gov.br/web/dou/-/portaria-de-24-de-janeiro-de-2018-2108559"
 
+from bs4 import BeautifulSoup
+import requests
 
-print(v)
+def verificar(link):
+    html = requests.get(link)
+    objetct = BeautifulSoup(html.content, 'html.parser')
+    div = objetct.find("div")
+    print(div)
+    
+    
+verificar(TEM)
