@@ -1,5 +1,5 @@
 from app.core.crawler import Crawler
-from app.models.Publication import Publication
+from app.models.Portaria import Portaria
 from bs4 import BeautifulSoup as Be
 import requests
 import re
@@ -8,29 +8,11 @@ import time
 
 class Scraping():
     def scraping(self, if_, date):
-        date_init = '01/01/2018'
-        date_end = '31/12/2018'
         
-        
-        if date == '2019':
-            date_init = '01/01/2019'
-            date_end = '31/12/2019'
-        elif date == '2020':
-            date_init = '01/01/2020'
-            date_end = '31/12/2020'
-        elif date == '2021':
-            date_init = '01/01/2021'
-            date_end = '31/12/2021'
-        elif date == '2022':
-            date_init = '01/01/2022'
-            date_end = '31/12/2022'
-        elif date == '2023':
-            date_init = '01/01/2023'
-            date_end = '31/12/2023'
         
         
         #start_time = time.time()
-        index = Crawler(date_init, date_end)
+        index = Crawler()
         links = index.crawler()
         
         #end_time = time.time()

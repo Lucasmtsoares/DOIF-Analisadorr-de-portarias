@@ -1,0 +1,126 @@
+#Prototipo arquitetural Projeto DOIFs 
+
+Database > publications
+
+colecao_ifac {
+    "_id": ObjectId("89uhgjfhfhgjfjfbvbv"),
+    "year": 2018,
+    "months": {
+        "Janeiro": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Fevereiro": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Marco": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Abril": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Maio": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Junho": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        }
+    }
+}
+
+colecao_ifal {
+    "_id": ObjectId("89uhgjfhfhgjfjfbvbv"),
+    "year": 2018,
+    "months": {
+        "Janeiro": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Fevereiro": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Marco": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Abril": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Maio": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        },
+        "Junho": {
+            "URLs": [
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js",
+                "https://cdn.jsdejlivr.net/npm/chart.js"
+            ]
+        }
+    }
+}
+
