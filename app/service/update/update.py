@@ -1,5 +1,5 @@
 from app.models.Map import Map
-from app.service.update.crawler import Crawler
+from app.core.crawler import Crawler
 from app.service.database.publicationDAO import PublicationDAO
 from app.models.Publication import Publication
 import time
