@@ -6,20 +6,25 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
+import requests
+from bs4 import BeautifulSoup
+import re
 
 class Crawler:
-    def __init__(self, if_, ifs_add, init, end):
-        self.init = init
-        self.end = end
+    def __init__(self, if_, ifs_add, if_uni, init, end):
         self.if_ = if_
         self.ifs_add = ifs_add
-        chromedriver_path = r'chromedriver.exe' 
+        self.if_uni = if_uni
+        self.init = init
+        self.end = end
+        chromedriver_path = r'Chromedriver\chromedriver.exe' 
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         service = Service(chromedriver_path)
         self.driver = webdriver.Chrome(service=service, options=options)
         self.url = 'https://www.in.gov.br/acesso-a-informacao/dados-abertos/base-de-dados'
         self.all_links = []
+        self.m = []
 
     def crawler(self):
         try:
@@ -65,7 +70,7 @@ class Crawler:
             WebDriverWait(self.driver, 10).until(EC.url_changes(self.url))
 
             links = self.result_urls()
-            self.all_links.extend(links)
+            self.m.extend(links)
             links_add = []
 
             for k in self.ifs_add:
@@ -86,7 +91,15 @@ class Crawler:
                 urls = self.result_urls()
                 links_add.extend(urls)
 
-            self.all_links.extend(links_add)
+            self.m.extend(links_add)
+            pop = self.m
+            print("Retornando URLs..")
+            urls_filter = self.filter_result(self.if_uni, pop)
+            print("Filtrando resultados...")
+            urls_clean = self.urls_filter_clean(urls_filter)
+            print("Eliminando URLs repetidas...")
+            self.all_links.extend(urls_clean)
+            print("Finalizado com sucesso!!")
             return self.all_links
 
         except Exception as error:
@@ -97,7 +110,6 @@ class Crawler:
     def result_urls(self):
         urls_all = []
         while True:
-
             try:
                 link_elements = self.driver.find_elements(By.CSS_SELECTOR, 'h5.title-marker a')
                 links = [element.get_attribute('href') for element in link_elements]
@@ -117,3 +129,28 @@ class Crawler:
 
         urls_all.reverse()
         return urls_all
+    
+    def filter_result(self, if_uni, urls):
+        urls_all = []
+        for link in urls:
+            try:
+                html = requests.get(link)
+                html.raise_for_status()
+                objetct = BeautifulSoup(html.content, 'html.parser')
+                orgao = objetct.find("span", class_='orgao-dou-data')
+                
+                if orgao:
+                    orgao_text = orgao.get_text()
+                    if re.search(r'\b' + re.escape(if_uni) + r'\b', orgao_text) or \
+                       re.search(r'\bReitoria\b', orgao_text) or \
+                       re.search(r'\bGabinete\b', orgao_text):
+                        urls_all.append(link)
+            except requests.RequestException as e:
+                print(f"Erro ao fazer a requisição!!")
+            except Exception as e:
+                print("Erro ao processar o link")
+        
+        return urls_all
+
+    def urls_filter_clean(self, urls):
+        return list(dict.fromkeys(urls))

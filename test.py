@@ -1,6 +1,3 @@
-links = ['https://www.in.gov.br/web/dou/-/portaria-n-2-504-de-9-de-outubro-de-2018-45175799', 
-         'https://www.in.gov.br/web/dou/-/portaria-de-24-de-janeiro-de-2018-2108559']
-
 
 
 institutos_federais = [
@@ -56,25 +53,50 @@ institutos_federais4 = ["IFAC","IFAL","IFAP","IFAM","IFBA","IF Baiano","IFCE","I
 
 
 v = "Pernambuco"
+x = "Reitoria"
 from bs4 import BeautifulSoup
 import requests
 import re
 
-def verificar(links):
-    urls = []
-    for i in links:
-        html = requests.get(i)
-        objetct = BeautifulSoup(html.content, 'html.parser')
-        orgao = objetct.find("span", class_='orgao-dou-data')
-        if orgao:
-            orgao_text = orgao.get_text()
-            
-            if re.search(r'\b' + re.escape("Alagoas") + r'\b', orgao_text):
-                urls.append(i)
-                
-        return urls
-    
-c = verificar(links)
+from bs4 import BeautifulSoup
+import requests
+import re
 
-for b in c:
-    print(b)
+# Lista de links para verificar
+k = ['https://www.in.gov.br/web/dou/-/portaria-n-3-069-de-28-de-dezembro-de-2017-1560962', 'https://www.in.gov.br/web/dou/-/portaria-n-1-de-3-de-janeiro-de-2018-1587535', 'https://www.in.gov.br/web/dou/-/portaria-n-3-073-de-28-de-dezembro-de-2017-1608114', 'https://www.in.gov.br/web/dou/-/portaria-n-23-de-4-de-janeiro-de-2018-1652192', 'https://www.in.gov.br/web/dou/-/portaria-n-32-de-5-de-janeiro-de-2018-1652205', 'https://www.in.gov.br/web/dou/-/portaria-n-53-de-9-de-janeiro-de-2018-1706675', 'https://www.in.gov.br/web/dou/-/portaria-n-54-de-9-de-janeiro-de-2018-1706688', 'https://www.in.gov.br/web/dou/-/portaria-n-62-de-9-de-janeiro-de-2018-1706701', 'https://www.in.gov.br/web/dou/-/portaria-n-52-de-9-de-janeiro-de-2018-1735378', 'https://www.in.gov.br/web/dou/-/portaria-n-78-de-11-de-janeiro-de-2018-1816696', 'https://www.in.gov.br/web/dou/-/portaria-n-79-de-11-de-janeiro-de-2018-1816709', 'https://www.in.gov.br/web/dou/-/portaria-n-80-de-11-de-janeiro-de-2018-1816722', 'https://www.in.gov.br/web/dou/-/portaria-n-81-de-11-de-janeiro-de-2018-1816735', 'https://www.in.gov.br/web/dou/-/portaria-n-10-de-4-de-janeiro-de-2018-1819720', 'https://www.in.gov.br/web/dou/-/portaria-n-129-de-18-de-janeiro-de-2018-2047769', 'https://www.in.gov.br/web/dou/-/portarias-de-18-de-janeiro-de-2018-2047782', 'https://www.in.gov.br/web/dou/-/portaria-n-133-de-18-de-janeiro-de-2018-2047795', 'https://www.in.gov.br/web/dou/-/portaria-n-172-de-24-de-janeiro-de-2018-2107818', 'https://www.in.gov.br/web/dou/-/portaria-n-144-de-22-de-janeiro-de-2018-2150616', 'https://www.in.gov.br/web/dou/-/portaria-n-179-de-25-de-janeiro-de-2018-2190788', 'https://www.in.gov.br/web/dou/-/portaria-n-202-de-29-de-janeiro-de-2018-2231008', 'https://www.in.gov.br/web/dou/-/portaria-n-199-de-29-de-janeiro-de-2018-2276483', 'https://www.in.gov.br/web/dou/-/portaria-n-200-de-29-de-janeiro-de-2018-2276496', 'https://www.in.gov.br/web/dou/-/portaria-n-201-de-29-de-janeiro-de-2018-2276509', 'https://www.in.gov.br/web/dou/-/portarias-de-12-de-janeiro-de-2018-1821692', 'https://www.in.gov.br/web/dou/-/portaria-de-24-de-janeiro-de-2018-2108559', 'https://www.in.gov.br/web/dou/-/portarias-de-29-de-janeiro-de-2018-2233584', 'https://www.in.gov.br/web/dou/-/portaria-n-23-de-4-de-janeiro-de-2018-1652192', 'https://www.in.gov.br/web/dou/-/portaria-n-172-de-24-de-janeiro-de-2018-2107818', 'https://www.in.gov.br/web/dou/-/portaria-de-24-de-janeiro-de-2018-2108559', 'https://www.in.gov.br/web/dou/-/portaria-n-202-de-29-de-janeiro-de-2018-2231008']
+
+
+
+# Variáveis de verificação
+v = "Alagoas"
+palavras = ["Reitoria", "Gabinete"]
+
+def verificar(v, links):
+        urls_all = []
+        for link in links:
+            try:
+                html = requests.get(link)
+                html.raise_for_status()
+                objetct = BeautifulSoup(html.content, 'html.parser')
+                orgao = objetct.find("span", class_='orgao-dou-data')
+                
+                if orgao:
+                    orgao_text = orgao.get_text()
+                    if re.search(r'\b' + re.escape(v) + r'\b', orgao_text) or \
+                       re.search(r'\bReitoria\b', orgao_text) or \
+                       re.search(r'\bGabinete\b', orgao_text):
+                        urls_all.append(link)
+            except requests.RequestException as e:
+                print(f"Erro ao fazer a requisição!!")
+            except Exception as e:
+                print("Erro ao processar o link")
+        
+        return urls_all
+
+# Chamando a função e imprimindo os links que atendem ao critério
+c = verificar(v,k)
+
+print(c)
+    
+print(f"Tamanho oi: {len(c)}")
+print(f"Tamanho oiiii: {len(k)}")
