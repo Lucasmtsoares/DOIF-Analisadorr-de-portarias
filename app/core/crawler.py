@@ -11,10 +11,10 @@ from bs4 import BeautifulSoup
 import re
 
 class Crawler:
-    def __init__(self, if_, ifs_add, if_uni, init, end):
+    def __init__(self, if_, ifs_add, if_federacao, init, end):
         self.if_ = if_
         self.ifs_add = ifs_add
-        self.if_uni = if_uni
+        self.if_uni = if_federacao
         self.init = init
         self.end = end
         chromedriver_path = r'Chromedriver\chromedriver.exe' 
@@ -130,7 +130,7 @@ class Crawler:
         urls_all.reverse()
         return urls_all
     
-    def filter_result(self, if_uni, urls):
+    def filter_result(self, if_federacao, urls):
         urls_all = []
         for link in urls:
             try:
@@ -141,7 +141,7 @@ class Crawler:
                 
                 if orgao:
                     orgao_text = orgao.get_text()
-                    if re.search(r'\b' + re.escape(if_uni) + r'\b', orgao_text) or \
+                    if re.search(r'\b' + re.escape(if_federacao) + r'\b', orgao_text) or \
                        re.search(r'\bReitoria\b', orgao_text) or \
                        re.search(r'\bGabinete\b', orgao_text):
                         urls_all.append(link)

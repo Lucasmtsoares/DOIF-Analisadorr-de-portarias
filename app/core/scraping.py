@@ -1,4 +1,4 @@
-from app.core.crawler import Crawler
+"""from app.core.crawler import Crawler
 from app.models.Portaria import Portaria
 from bs4 import BeautifulSoup as Be
 import requests
@@ -94,3 +94,55 @@ class Scraping():
         return publications
 
 
+"""
+k = ['https://www.in.gov.br/web/dou/-/portaria-n-3-069-de-28-de-dezembro-de-2017-1560962', 'https://www.in.gov.br/web/dou/-/portaria-n-1-de-3-de-janeiro-de-2018-1587535', 'https://www.in.gov.br/web/dou/-/portaria-n-3-073-de-28-de-dezembro-de-2017-1608114', 'https://www.in.gov.br/web/dou/-/portaria-n-23-de-4-de-janeiro-de-2018-1652192',  ]
+
+from app.models.Publication import Publication
+import time
+from bs4 import BeautifulSoup
+import requests
+import re
+
+year = 2018
+class Scraping:
+    def __init__(self, urls):
+        #self.collecion = collecion
+        self.urls = urls
+        
+    def scraping(self):
+        print("Iniciando extracao...")
+        for url in self.urls:
+            html = requests.get(url, timeout=10)
+            beautifulSoup = BeautifulSoup(html.content, 'html.parser')
+            #if_collecion = self.collecion
+            
+            date = beautifulSoup.find('span', class_='publicado-dou-data').get_text()
+            orgao = beautifulSoup.find('span', class_='orgao-dou-data').get_text()
+            concierge = beautifulSoup.find('p', class_='identifica') #erro
+            if not concierge:
+                txt = beautifulSoup.find('h3', class_='titulo-dou')
+                concierge = txt.find('span').get_text()
+            content = beautifulSoup.find('div', class_='texto-dou').get_text()
+            responsible = beautifulSoup.find('p', class_='assina').get_text()
+            type = self.indentify_type(content=content)
+            #publication = Publication()
+            print(f'Objetos: {type,concierge, date, responsible}')
+        
+       
+                
+    def indentify_type(self, content):
+        nomecao = re.compile(r'\b(NOMEAR|Nomear|nomear|NOMEIA|Nomeia|nomeia)\b')
+        exoneracao = re.compile(r'\b(EXONERAR|Exonerar|exonerar|EXONERA|Exonera|exonera)\b')
+        autorizar = re.compile(r'\b(AUTORIZAR)\b')
+        
+        #verificação
+        if nomecao.search(content):
+            return "Nomeação"
+        elif exoneracao.search(content):
+            return "Exoneração"
+        elif autorizar.search(content):
+            return "Autorizar"
+        else:
+            return "Outro"
+        
+   
