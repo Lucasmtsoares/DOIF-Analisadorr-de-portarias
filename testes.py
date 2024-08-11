@@ -49,9 +49,10 @@ def repete():
     
     print(f"Tamanho: {len(lista_sem_duplicatas)}")
     
-    
-repete()
+b = ["Instituto Federal de Educação, Ciência e Tecnologia do Acre", "Instituto Federal do Acre"]
+v = Crawler("ifac", b, "Acre", "01/01/2018","31/01/2018").crawler()
+print(f"Tamanho crawler: {len(v)}")
 
 #Forneci 31 urls
 #das 31 urls 27 são do ifal
-#das 27 urls 24 são unicas!!
+#https://docs.google.com/document/d/1uXH5P6dvawiYq8BKzx_tw07MyKx3rsbj3OClEimZD7o/edit

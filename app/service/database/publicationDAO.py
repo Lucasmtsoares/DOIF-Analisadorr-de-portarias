@@ -10,23 +10,32 @@ class PublicationDAO:
     
         
     def create(self, publication):
-        collection = self.db[publication.collecion]
+        collection = self.db[publication.if_collecion]
 
         # Construindo o campo a ser adicionado/atualizado
         update = {
-            f"months.{publication.months}": {
-                "URLs": publication.urls
+            f"months.{publication.month}": {
+                "publication":{
+                    "type": publication.type,
+                    "organ": publication.organ,
+                    "content": publication.content,
+                    "concierge": publication.concierge,
+                    "date": publication.date,
+                    "responsible": publication.responsible,
+                    "url": publication.url
+                }
             }
         }
-
+   
+    
         # Atualizando o documento existente ou inserindo um novo
-        result = collection.update_one(
+        result = collection.update_many(
             {"year": publication.year},
-            {"$set": update},
+            {"$push": update},
             upsert=True  # Cria um novo documento se não encontrar nenhum correspondente
         )
         
-        return result.upserted_id if result.upserted_id else "Documento atualizado"
+        return result.upserted_id if result.upserted_id else "Coleção atualizada"
     def close(self):
         self.client.close()
         

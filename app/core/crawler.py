@@ -92,16 +92,21 @@ class Crawler:
                 links_add.extend(urls)
 
             self.m.extend(links_add)
-            pop = self.m
+            print(f"Total de URLs (sem criterio) -> {len(self.m)}")
+            pre_urls = self.m
             print("Retornando URLs..")
-            urls_filter = self.filter_result(self.if_uni, pop)
+            urls_filter = self.filter_result(self.if_uni, pre_urls)
             print("Filtrando resultados...")
+            print(f"URLS apenas da federacao -> {len(urls_filter)}")
+            
             urls_clean = self.urls_filter_clean(urls_filter)
             print("Eliminando URLs repetidas...")
+            print(f"URLS sem repeticao -> {len(urls_clean)}")
             self.all_links.extend(urls_clean)
             print("Finalizado com sucesso!!")
+            self.driver.quit()
             return self.all_links
-
+            
         except Exception as error:
             print("Erro exception", error)
         finally:
@@ -136,21 +141,31 @@ class Crawler:
             try:
                 html = requests.get(link)
                 html.raise_for_status()
-                objetct = BeautifulSoup(html.content, 'html.parser')
-                orgao = objetct.find("span", class_='orgao-dou-data')
+                beautifulSoup = BeautifulSoup(html.content, 'html.parser')
+                orgao = beautifulSoup.find("span", class_='orgao-dou-data')
+                concierge = beautifulSoup.find('p', class_='identifica')
+                if concierge:
+                    concierge = concierge.get_text()
+                else:
+                    concierge = beautifulSoup.find('h3', class_='titulo-dou')
+                    concierge = concierge.find('span').get_text()
                 
                 if orgao:
                     orgao_text = orgao.get_text()
-                    if re.search(r'\b' + re.escape(if_federacao) + r'\b', orgao_text) or \
-                       re.search(r'\bReitoria\b', orgao_text) or \
-                       re.search(r'\bGabinete\b', orgao_text):
+                    if (re.search(r'\b' + re.escape(if_federacao) + r'\b', orgao_text) or
+                        re.search(r'\bReitoria\b', orgao_text) or
+                        re.search(r'\bGabinete\b', orgao_text)) and \
+                    not re.search(r'\bRETIFICAÇÃO\b', concierge):  # Negação para "RETIFICAÇÂO"
+                    
                         urls_all.append(link)
+
             except requests.RequestException as e:
-                print(f"Erro ao fazer a requisição!!")
+                print(f"Erro ao fazer a requisição: {e}")
             except Exception as e:
-                print("Erro ao processar o link")
+                print(f"Erro ao processar o link: {e}")
         
         return urls_all
+
 
     def urls_filter_clean(self, urls):
         return list(dict.fromkeys(urls))
