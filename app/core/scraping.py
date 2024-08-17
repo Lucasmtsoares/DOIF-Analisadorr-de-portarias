@@ -36,9 +36,14 @@ class Scraping:
                 concierge = beautifulSoup.find('h3', class_='titulo-dou')
                 concierge = concierge.find('span').get_text()
             
-                
             content = beautifulSoup.find('div', class_='texto-dou')
             if content:
+                extract = content.find('p', class_='identifica')
+                if extract:
+                    extract.extract()
+                elif content.find('h3', class_='titulo-dou'):
+                    extract = content.find('h3', class_='titulo-dou')
+                    extract.extract()
                 content = content.get_text()
             else:
                 content = "Sem conteúdo"

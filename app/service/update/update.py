@@ -21,7 +21,7 @@ class UpdateDatabase:
     def update(self):
         print("Iniciando atualização...")
         
-        publicationDAO = PublicationDAO()  # Instanciação fora do loop
+          # Instanciação fora do loop
         
         try:
             for month, interv in self.interval.items():
@@ -33,6 +33,7 @@ class UpdateDatabase:
                     publications = Scraping(ifs_acr, month, self.year, indexs).scraping()
                     
                     print("Fim da extração")
+                    print(ifs_acr, ifs_add, month, if_federacao )
                     print("Armazenando no database...")
                     
                     for publication in publications:

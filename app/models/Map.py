@@ -83,7 +83,7 @@ class Map:
             return interval
         else:
             interval = {
-                "janeiro":{
+               "janeiro":{
                     "init": f"01/01/{year}",
                     "end": f"31/01/{year}"
                 },
@@ -137,7 +137,7 @@ class Map:
         return ano % 4 == 0 and (ano % 100 != 0 or ano % 400 == 0)
        
         
-            
+#if baiano, if sertao pe, ifg, ifpb, 
             
             
 

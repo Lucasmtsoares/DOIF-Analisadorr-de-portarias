@@ -9,6 +9,7 @@ from selenium.webdriver.chrome.service import Service
 import requests
 from bs4 import BeautifulSoup
 import re
+import time
 
 class Crawler:
     def __init__(self, if_, ifs_add, if_federacao, init, end):
@@ -32,27 +33,31 @@ class Crawler:
             input_text = self.driver.find_element(By.CSS_SELECTOR, 'input#search-bar')
             input_text.send_keys(self.if_)
 
-            button_advance = WebDriverWait(self.driver, 10).until(
+            button_advance = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'a#toggle-search-advanced'))
             )
             button_advance.click()
-
-            result_exact = WebDriverWait(self.driver, 10).until(
+            #tempo de espera
+            time.sleep(5)
+            result_exact = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'input#tipo-pesquisa-1'))
             )
             result_exact.click()
-
-            section_dou = WebDriverWait(self.driver, 10).until(
+            #tempo de espera
+            time.sleep(3)
+            section_dou = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'input#do2'))
             )
             section_dou.click()
-
-            ediction = WebDriverWait(self.driver, 10).until(
+            #tempo de espera
+            time.sleep(3)
+            ediction = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'input#personalizado'))
             )
             ediction.click()
-
-            periodo_init = WebDriverWait(self.driver, 10).until(
+            #tempo de espera
+            time.sleep(4)
+            periodo_init = WebDriverWait(self.driver, 15).until(
                 EC.presence_of_element_located((By.ID, 'data-inicio'))
             )
             self.driver.execute_script(f"arguments[0].value = '{self.init}';", periodo_init)
@@ -61,13 +66,14 @@ class Crawler:
                 EC.presence_of_element_located((By.ID, 'data-fim'))
             )
             self.driver.execute_script(f"arguments[0].value = '{self.end}';", periodo_end)
-
-            search = WebDriverWait(self.driver, 10).until(
+            #tempo de espera
+            time.sleep(3)
+            search = WebDriverWait(self.driver, 15).until(
                 EC.visibility_of_element_located((By.CSS_SELECTOR, 'button.button'))
             )
             search.click()
 
-            WebDriverWait(self.driver, 10).until(EC.url_changes(self.url))
+            WebDriverWait(self.driver, 15).until(EC.url_changes(self.url))
 
             links = self.result_urls()
             self.m.extend(links)
@@ -78,19 +84,22 @@ class Crawler:
                 input_text.clear()
                 input_text.send_keys(k)
 
-                button_advance = WebDriverWait(self.driver, 10).until(
+                button_advance = WebDriverWait(self.driver, 15).until(
                     EC.visibility_of_element_located((By.CSS_SELECTOR, 'a#toggle-search-advanced'))
                 )
                 button_advance.click()
 
-                search = WebDriverWait(self.driver, 10).until(
+                #tempo de espera
+                time.sleep(4)
+                search = WebDriverWait(self.driver, 15).until(
                     EC.visibility_of_element_located((By.CSS_SELECTOR, 'button.button'))
                 )
                 search.click()
-
-                urls = self.result_urls()
+                #tempo de espera
+                time.sleep(4)
+                urls = self.result_urls() #chamada da função
                 links_add.extend(urls)
-
+            self.driver.quit() #fechamento da navegador
             self.m.extend(links_add)
             print(f"Total de URLs (sem criterio) -> {len(self.m)}")
             pre_urls = self.m
@@ -104,7 +113,7 @@ class Crawler:
             print(f"URLS sem repeticao -> {len(urls_clean)}")
             self.all_links.extend(urls_clean)
             print("Finalizado com sucesso!!")
-            self.driver.quit()
+            
             return self.all_links
             
         except Exception as error:
@@ -127,7 +136,7 @@ class Crawler:
                     break
                 else:
                     ActionChains(self.driver).click(next_button).perform()
-                    WebDriverWait(self.driver, 10).until(EC.staleness_of(next_button))
+                    WebDriverWait(self.driver, 15).until(EC.staleness_of(next_button))
             except Exception as exception:
                 print(f"Página sem resultados. ERRO: {exception}")
                 break
@@ -153,8 +162,7 @@ class Crawler:
                 if orgao:
                     orgao_text = orgao.get_text()
                     if (re.search(r'\b' + re.escape(if_federacao) + r'\b', orgao_text) or
-                        re.search(r'\bReitoria\b', orgao_text) or
-                        re.search(r'\bGabinete\b', orgao_text)) and \
+                        orgao_text == 'Reitoria' or orgao_text == 'Gabinete') and \
                     not re.search(r'\bRETIFICAÇÃO\b', concierge):  # Negação para "RETIFICAÇÂO"
                     
                         urls_all.append(link)
@@ -163,6 +171,7 @@ class Crawler:
                 print(f"Erro ao fazer a requisição: {e}")
             except Exception as e:
                 print(f"Erro ao processar o link: {e}")
+                print(f"Link -> {link}")
         
         return urls_all
 

@@ -49,8 +49,8 @@ def repete():
     
     print(f"Tamanho: {len(lista_sem_duplicatas)}")
     
-b = ["Instituto Federal de Educação, Ciência e Tecnologia do Acre", "Instituto Federal do Acre"]
-v = Crawler("ifac", b, "Acre", "01/01/2018","31/01/2018").crawler()
+b = ["Instituto Federal de Educação, Ciência e Tecnologia de São Paulo", "Instituto Federal de São Paulo"]
+v = Crawler("ifsp", b, "São Paulo", "01/01/2018","31/01/2018").crawler()
 print(f"Tamanho crawler: {len(v)}")
 
 #Forneci 31 urls
