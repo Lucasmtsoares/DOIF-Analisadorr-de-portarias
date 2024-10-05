@@ -6,24 +6,81 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static', filename="css/basic-style.css")}}">
+    <link rel="stylesheet" href="{{url_for('static', filename="css/basic.css")}}">
     <title>Doif</title>
 </head>
 <body>
-    
-    <div class="container">
-        
-        <h1 class="title">DOIFs - <span>Analisador de portarias das IFs</span></h1>
-        <div class="box-button">
-            <a class="button" href="{{url_for('analisar_portarias')}}">Experimente</a>
+    <header class="header">
+        <ul>
+            <li>Sobre</li>
+            <li>GitHub</li>
+            <li>Contato</li>
+        </ul>
+    </header>
+    <section class="container">
+        <div class="box-title">
+            <span class="title-main"><strong>DOIFs</strong></span>
+            <span class="title-secundary">Diário dos Institutos Federais</span>
         </div>
-        <div class="res"></div>
-    </div>
-    <section class="box-group">
-        <div class="box"><span class="box-title">Sobre</span> </br></br>é uma plataforma de recuparação de informações das portarias das IFs (Instituições Federais de ensino).</div>
-        <div class="box"><span class="box-title">Extração</span> </br></br>A fim de análisar o comportamento de atos de pessoal publicados no DOU referentes as IFs o sistema extrair os dados através de Web scraping/Web crawler, sem uso de API</div>
-        <div class="box"><span class="box-title">Filtros</span> </br></br>O sistema realiza filtragem nos dados obtidos para posterior análise.  Inicialmente, os atos recuperados sã de NOMEAÇÔES e EXONERAÇÔES.</div>
-        <div class="box"><span class="box-title">Limitações</span> </br></br>A recuperação de dados por meio de Web scraping/Web crawler ocasiona algumas limitações como um tempo de processamento demorado. </div>
-    </section>
+        <div class="box-content">
+            <section class="box-consulta">
+                <form action="{{url_for('page_de_busca')}}" method="get">
+                    <input class="termo-busca style-cards" type="text" placeholder="Digite aqui...">
+                    <select class="style-cards" name="subject" id="subject" aria-placeholder="Ato">
+                        <option value="" selected disabled hidden>Ato de pessoal</option>
+                        <option value="nomeacao">Nomeação</option>
+                        <option value="exoneracao">Exoneração</option>
+                      </select>
+                      <select class="instituto style-cards" name="subject" id="subject" aria-placeholder="instituto">
+                        <option value="" selected disabled hidden>Instituto</option>
+                        <option value="IFAC">IFAC</option>
+                        <option value="IFAL">IFAL</option>
+                        <option value="IFAP">IFAP</option>
+                        <option value="IFAM">IFAM</option>
+                        <option value="IFBA">IFBA</option>
+                        <option value="IF Baiano">IF Baiano</option>
+                        <option value="IFCE">IFCE</option>
+                        <option value="IFB">IFB</option>
+                        <option value="IFG">IFG</option>
+                        <option value="IF Goiano">IF Goiano</option>
+                        <option value="IFES">IFES</option>
+                        <option value="IFMA">IFMA</option>
+                        <option value="IFMG">IFMG</option>
+                        <option value="IFNMG">IFNMG</option>
+                        <option value="IF Sudeste MG">IF Sudeste MG</option>
+                        <option value="IFSULDEMINAS">IFSULDEMINAS</option>
+                        <option value="IFTM">IFTM</option>
+                        <option value="IFMT">IFMT</option>
+                        <option value="IFMS">IFMS</option>
+                        <option value="IFPA">IFPA</option>
+                        <option value="IFPB">IFPB</option>
+                        <option value="IFPE">IFPE</option>
+                        <option value="IF Sertão PE">IF Sertão PE</option>
+                        <option value="IFPI">IFPI</option>
+                        <option value="IFPR">IFPR</option>
+                        <option value="IFRJ">IFRJ</option>
+                        <option value="IFF">IFF</option>
+                        <option value="IFRN">IFRN</option>
+                        <option value="IFRS">IFRS</option>
+                        <option value="IFFar">IFFar</option>
+                        <option value="IFSUL">IFSUL</option>
+                        <option value="IFRO">IFRO</option>
+                        <option value="IFRR">IFRR</option>
+                        <option value="IFSC">IFSC</option>
+                        <option value="IFC">IFC</option>
+                        <option value="IFSP">IFSP</option>
+                        <option value="IFS">IFS</option>
+                        <option value="IFTO">IFTO</option>
+                    </select>
+                    
+                    <button type="submit" class="buscar style-cards">Buscar</button>
+                </form>
+            </section>
+            <section class="box-painel">
+                <a href="{{url_for('painel_de_analise')}}"><button class="painel-analise style-cards">Painel de análise</button></a>
+            </section>
+        </div>
+        
+    
 </body>
 </html>

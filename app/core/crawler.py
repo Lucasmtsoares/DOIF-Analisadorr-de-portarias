@@ -148,7 +148,7 @@ class Crawler:
         urls_all = []
         for link in urls:
             try:
-                html = requests.get(link)
+                html = requests.get(link, verify=False)
                 html.raise_for_status()
                 beautifulSoup = BeautifulSoup(html.content, 'html.parser')
                 orgao = beautifulSoup.find("span", class_='orgao-dou-data')
@@ -168,10 +168,10 @@ class Crawler:
                         urls_all.append(link)
 
             except requests.RequestException as e:
-                print(f"Erro ao fazer a requisição: {e}")
+                print(f"Erro ao fazer a requisição: {link}")
             except Exception as e:
-                print(f"Erro ao processar o link: {e}")
-                print(f"Link -> {link}")
+                print(f"Erro ao processar o link: {link}")
+                
         
         return urls_all
 

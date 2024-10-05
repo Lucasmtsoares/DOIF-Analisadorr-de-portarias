@@ -36,15 +36,11 @@ class PublicationDAO:
         )
         
         return result.upserted_id if result.upserted_id else "Coleção atualizada"
-    def close(self):
-        self.client.close()
         
-    def read(self):
-        collection = self.db["ifac"]
-        filter = {"year": 2018}
-        month = "Janeiro"
-        projection = {f"months.{month}.URLs": 1, "_id": 0}  # Inclui apenas o campo URLs e exclui _id
-        document = collection.find_one(filter, projection)
+    def read(self, coll):
+        
+        collection = self.db[coll]
+        document = collection.find({'year':2018})
         self.client.close()
         return document
     
@@ -63,6 +59,9 @@ class PublicationDAO:
         colecao = self.db["ifac"]
         id = {"_id": ObjectId("666a8b1886a708d806f6c073")}
         colecao.find_one_and_delete(id)
+        self.client.close()
+        
+    def close(self):
         self.client.close()
         
     

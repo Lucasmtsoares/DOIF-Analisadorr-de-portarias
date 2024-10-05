@@ -5,17 +5,24 @@ from app import app
 import json
 
 @app.route("/")
-def index(): 
+def home(): 
     return render_template("basic.html")
 
-@app.route("/analisar-portarias")
-def analisar_portarias():
-    res = result
-    #x = Analitic()
-    #res = x.analitic()
-    
-        
-    return render_template("analitic.html", res=res)
+@app.route('/page-busca')
+def page_de_busca():
+    return render_template("page_de_busca.html")
+
+@app.route("/painel-de-analise")
+def painel_de_analise():
+            
+    return render_template("painel_de_analise.html")
+
+@app.route("/painel-grafico")
+def painel_grafico():
+            
+    return render_template("painel_grafico.html")
+
+
 
 @app.route("/analisar-portarias", methods=['POST'])
 def analisar_portaria():

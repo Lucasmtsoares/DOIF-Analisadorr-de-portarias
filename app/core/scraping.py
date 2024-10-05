@@ -16,7 +16,7 @@ class Scraping:
         print("Iniciando extracao...")
         pub = []
         for url in self.urls:
-            html = requests.get(url, timeout=10)
+            html = requests.get(url, verify=False)
             beautifulSoup = BeautifulSoup(html.content, 'html.parser')
             
             date = beautifulSoup.find('span', class_='publicado-dou-data')

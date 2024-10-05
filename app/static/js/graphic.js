@@ -1,6 +1,34 @@
-const grafic_nomeacao = document.getElementById('grafic-nomeacao');
-const grafic_exoneracao = document.getElementById('grafic-exoneracao')
+const grafic_overview = document.getElementById('graphic-overview')
+const grafic_nomeacao = document.getElementById('graphic-nomeacao');
+const grafic_exoneracao = document.getElementById('graphic-exoneracao')
+//overvew
+const jan_overview = document.getElementById('jan-overview').textContent
+const jan_overview_data = parseInt(jan_overview)
+const fev_overview = document.getElementById('fev-overview').textContent
+const fev_overview_data = parseInt(fev_overview)
+const marc_overview = document.getElementById('marc-overview').textContent
+const marc_overview_data = parseInt(marc_overview)
+const abri_overview = document.getElementById('abri-overview').textContent
+const abri_overview_data = parseInt(abri_overview)
+const mai_overview = document.getElementById('mai-overview').textContent
+const mai_overview_data = parseInt(mai_overview)
+const jun_overview = document.getElementById('jun-overview').textContent
+const jun_overview_data = parseInt(jun_overview)
+const jul_overview = document.getElementById('jul-overview').textContent
+const jul_overview_data = parseInt(jul_overview)
+const ago_overview = document.getElementById('ago-overview').textContent
+const ago_overview_data = parseInt(ago_overview)
+const set_overview = document.getElementById('set-overview').textContent
+const set_overview_data = parseInt(set_overview)
+const out_overview = document.getElementById('out-overview').textContent
+const out_overview_data = parseInt(out_overview)
+const nov_overview = document.getElementById('nov-overview').textContent
+const nov_overview_data = parseInt(nov_overview)
+const dez_overview = document.getElementById('dez-overview').textContent
+const dez_overview_data = parseInt(dez_overview)
+
 //nomeacoes
+
 const jan_nom = document.getElementById('jan-nom').textContent
 const jan_nom_data = parseInt(jan_nom)
 const fev_nom = document.getElementById('fev-nom').textContent
@@ -15,6 +43,7 @@ const jun_nom = document.getElementById('jun-nom').textContent
 const jun_nom_data = parseInt(jun_nom)
 const jul_nom = document.getElementById('jul-nom').textContent
 const jul_nom_data = parseInt(jul_nom)
+
 const ago_nom = document.getElementById('ago-nom').textContent
 const ago_nom_data = parseInt(ago_nom)
 const set_nom = document.getElementById('set-nom').textContent
@@ -25,7 +54,6 @@ const nov_nom = document.getElementById('nov-nom').textContent
 const nov_nom_data = parseInt(nov_nom)
 const dez_nom = document.getElementById('dez-nom').textContent
 const dez_nom_data = parseInt(dez_nom)
-
 //exoneracoes
 
 const jan_exo = document.getElementById('jan-exo').textContent
@@ -53,13 +81,13 @@ const nov_exo_data = parseInt(nov_exo)
 const dez_exo = document.getElementById('dez-exo').textContent
 const dez_exo_data = parseInt(dez_exo)
 
-new Chart(grafic_nomeacao, {
+new Chart(grafic_overview, {
   type: 'line',
   data: {
     labels: ['Jan', 'Fev', 'Mar', 'Abri', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     datasets: [{
-      label: 'Nomeações',
-      data: [jan_nom_data, fev_nom_data, marc_nom_data, abri_nom_data, mai_nom_data, jun_nom_data, jul_nom_data, ago_nom_data, set_nom_data, out_nom_data, nov_nom_data, dez_nom_data],
+      label: 'Overview',
+      data: [jan_overview_data, fev_overview_data, marc_overview_data, abri_overview_data, mai_overview_data, jun_overview_data, jul_overview_data, ago_overview_data, set_overview_data, out_overview_data, nov_overview_data, dez_overview_data],
       borderWidth: 1
     }]
   },
@@ -71,6 +99,27 @@ new Chart(grafic_nomeacao, {
     }
   }
 });
+
+new Chart(grafic_nomeacao, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Fev', 'Mar', 'Abri', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    datasets: [{
+      label: 'Nomeações',
+      data: [jan_exo_data, fev_exo_data, marc_exo_data, abri_exo_data, mai_exo_data, jun_exo_data, jul_exo_data, ago_exo_data, set_exo_data, out_exo_data, nov_exo_data, dez_exo_data],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+
 new Chart(grafic_exoneracao, {
   type: 'line',
   data: {
@@ -89,3 +138,4 @@ new Chart(grafic_exoneracao, {
     }
   }
 });
+
