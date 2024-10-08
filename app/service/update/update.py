@@ -1,4 +1,3 @@
-
 from app.models.Map import Map
 from app.core.crawler import Crawler
 from app.core.scraping import Scraping
@@ -16,7 +15,7 @@ class UpdateDatabase:
         self.ifs_extenso_lim = Map().map_ifs_extenso_lim()  # Armazena a segunda lista
         self.if_fereacao = Map().map_ifs_federacao()
         self.interval = Map().map_interval(self.year)
-        print("Salve!!")
+       
         
     def update(self):
         print("Iniciando atualização...")
