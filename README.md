@@ -118,6 +118,7 @@ O banco de dados escolhido para armazenar as informações da aplicação foi o 
 
 Atualmente, há o armazenamento de todos os dados referentes ao ano de 2018. Todavia, é possível que esse conjunto de dados possam não estar 100% fiéis em relação ao Diário Oficial da União. Isso ocorre porque os termos usados para filtrar os resultados e por conseguinte extrair as URLs são variados, e o que vale e contempla um instituto, pode não funcionar com outra, já que as páginas web do Diário Oficial da União (as matérias) podem ser escritas ligeiramente diferentes. Por exemplo, em uma o órgão responsável pode ser “reitoria”, em outro pode ser “gabinete” ou outra variação. E é preciso ter o órgão especificado, pois pode haver co-correspondência e as mesmas URLs serem extraídas para dois institutos diferentes. Então fica a ressalva.
 
+*No arquivo "config.py" há as credenciais para acessar a conta no MongoDB Atlas, plataforma de armazenamento em nuvem, onde os dadods enttão armazenados. *
 
 ## Atualização
 
